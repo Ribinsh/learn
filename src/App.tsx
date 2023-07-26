@@ -1,5 +1,5 @@
-import { Authenticated, GitHubBanner, Refine } from "@refinedev/core";
-import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
+import { Authenticated, Refine } from "@refinedev/core";
+//  import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
 import {
   ErrorComponent,
@@ -24,64 +24,46 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import { authProvider } from "./authProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
+
+
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
+import { UserList, UserEdit, UserShow } from "./pages/users";
+import { UserCreate } from "./pages/users/create";
 
-const API_URL = "https://flowing-mammal-24.hasura.app/v1/graphql";
-const WS_URL = "ws://flowing-mammal-24.hasura.app/v1/graphql";
+const API_URL = "https://guided-lacewing-38.hasura.app/v1/graphql";
+
 
 const client = new GraphQLClient(API_URL, {
   headers: {
-    "x-hasura-role": "public",
+    "x-hasura-role": "admin",
+    'x-hasura-admin-secret':"F1QSOR2z7Ui7YT2c8rFKG7IEURqgz0YnN0l67nKlArjDO9VlC3btxQsAk6JkHhVl"
   },
 });
 
-const webSocketClient = graphqlWS.createClient({
-  url: WS_URL,
-});
+
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
-      <RefineKbarProvider>
+      {/* <GitHubBanner /> */}
+      
         <ColorModeContextProvider>
           <Refine
             dataProvider={dataProvider(client)}
-            liveProvider={liveProvider(webSocketClient)}
+            // liveProvider={liveProvider(webSocketClient)}
             notificationProvider={notificationProvider}
             routerProvider={routerBindings}
             authProvider={authProvider}
             resources={[
+              
               {
-                name: "blog_posts",
-                list: "/blog-posts",
-                create: "/blog-posts/create",
-                edit: "/blog-posts/edit/:id",
-                show: "/blog-posts/show/:id",
-                meta: {
-                  canDelete: true,
-                },
-              },
-              {
-                name: "categories",
-                list: "/categories",
-                create: "/categories/create",
-                edit: "/categories/edit/:id",
-                show: "/categories/show/:id",
+                name: "users",
+                list: "/users",
+                create: "/users/create",
+                edit: "/users/edit/:id",
+                show: "/users/show/:id",
                 meta: {
                   canDelete: true,
                 },
@@ -105,23 +87,15 @@ function App() {
                   </Authenticated>
                 }
               >
-                <Route
-                  index
-                  element={<NavigateToResource resource="blog_posts" />}
-                />
-                <Route path="/blog-posts">
-                  <Route index element={<BlogPostList />} />
-                  <Route path="create" element={<BlogPostCreate />} />
-                  <Route path="edit/:id" element={<BlogPostEdit />} />
-                  <Route path="show/:id" element={<BlogPostShow />} />
-                </Route>
-                <Route path="/categories">
-                  <Route index element={<CategoryList />} />
-                  <Route path="create" element={<CategoryCreate />} />
-                  <Route path="edit/:id" element={<CategoryEdit />} />
-                  <Route path="show/:id" element={<CategoryShow />} />
-                </Route>
-                <Route path="*" element={<ErrorComponent />} />
+              
+              <Route path="*" element={<ErrorComponent />} />
+
+              <Route path="users">
+                <Route index element = {<UserList/>}/>
+                <Route path="/users/show/:id" element= {<UserShow/>} />
+                <Route path="/users/edit/:id" element= {<UserEdit/>} />
+                <Route path="/users/create" element={<UserCreate/>}/>
+              </Route>
               </Route>
               <Route
                 element={
@@ -135,13 +109,12 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
               </Route>
             </Routes>
-
-            <RefineKbar />
+ 
             <UnsavedChangesNotifier />
             <DocumentTitleHandler />
           </Refine>
         </ColorModeContextProvider>
-      </RefineKbarProvider>
+     
     </BrowserRouter>
   );
 }

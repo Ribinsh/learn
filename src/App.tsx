@@ -29,8 +29,8 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { UserList, UserEdit, UserShow } from "./pages/users";
-import { UserCreate } from "./pages/users/create";
+import { ProductList, UserEdit, UserShow } from "./pages/products";
+import { UserCreate } from "./pages/products/create";
 
 const API_URL = "https://guided-lacewing-38.hasura.app/v1/graphql";
 
@@ -59,11 +59,11 @@ function App() {
             resources={[
               
               {
-                name: "users",
-                list: "/users",
-                create: "/users/create",
-                edit: "/users/edit/:id",
-                show: "/users/show/:id",
+                name: "products",
+                list: "/products",
+                create: "/products/create",
+                edit: "/products/edit/:id",
+                show: "/products/show/:id",
                 meta: {
                   canDelete: true,
                 },
@@ -90,11 +90,11 @@ function App() {
               
               <Route path="*" element={<ErrorComponent />} />
 
-              <Route path="users">
-                <Route index element = {<UserList/>}/>
-                <Route path="/users/show/:id" element= {<UserShow/>} />
-                <Route path="/users/edit/:id" element= {<UserEdit/>} />
-                <Route path="/users/create" element={<UserCreate/>}/>
+              <Route path="products">
+                <Route index element = {<ProductList/>}/>
+                <Route path="/products/show/:id" element= {<UserShow/>} />
+                <Route path="/products/edit/:id" element= {<UserEdit/>} />
+                <Route path="/products/create" element={<UserCreate/>}/>
               </Route>
               </Route>
               <Route

@@ -1,85 +1,88 @@
+import { UploadOutlined } from "@ant-design/icons";
+import { Create, useForm, useSelect } from "@refinedev/antd";
+import { Button, Col, Form, Image, Input, Row, Select, Upload } from "antd";
+import CustomUpload from "../../components/CustomUpload";
+import { useState } from "react";
+// const AvatarImage = "https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&w=600";
 
-import { Create , useForm , useSelect } from "@refinedev/antd"
-import { Form , Input , Select } from "antd"
+interface Product {
+    formProps: any;
+    // setPhotoUrl: any;
+    // photoUrl: any;
+  }
 
-export const UserCreate : React.FC = () => {
-    const { formProps, saveButtonProps } = useForm({
-        resource: "users",
-        meta: {
-           fields:["id","name","age","salary","job","married"]
-        }
-    }); 
-    return( 
-        <Create saveButtonProps={saveButtonProps}>
-            <Form {...formProps} layout="vertical">
-            <Form.Item
-                label="Name"
-                name="name"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Job"
-                name="job"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Salary"
-                name="salary"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Age"
-                name="age"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Input />
-            </Form.Item>
-            <Form.Item
-                label="Marriage"
-                name="married"
-                rules={[
-                    {
-                        required: true,
-                    },
-                ]}
-            >
-                <Select
-                    options={[
-                        {
-                            label: "Yes",
-                            value: true,
-                        },
-                        {
-                            label: "No",
-                            value: false,
-                        }
-                    ]}
-                />
-            </Form.Item>
-        </Form>
-        </Create>
+export const ProductCreate: React.FC<Product> = ({formProps}) => {
+    // const [initial_url, setInitial_url] = useState<any>(AvatarImage);
 
-     )
-}
+  return (
+      <Form {...formProps} layout="vertical" >
+        <Form.Item
+          label="Name"
+          name="product_name"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input placeholder="product Name" />
+        </Form.Item>
+        <Form.Item
+          label="Type"
+          name="type"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Product LInk"
+          name="product_link"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item label="Description" name="description">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Trending" name="trending">
+          <Select
+            
+            options={[
+              {
+                label: "Yes",
+                value: true,
+              },
+              {
+                label: "No",
+                value: false,
+              },
+            ]}
+          />
+        </Form.Item>
+        <Form.Item label="List" name="list_status">
+          <Select
+           
+            options={[
+              {
+                label: "Yes",
+                value: true  ,
+              },
+              {
+                label: "No",
+                value: false ,
+              },
+            ]}
+          />
+        </Form.Item>
+      </Form>
+    // </Create>
+  );
+};

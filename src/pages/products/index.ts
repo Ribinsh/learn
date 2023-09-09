@@ -1,3 +1,3 @@
 export {ProductList} from "./list"
-export {UserEdit} from "./edit"
-export {UserShow} from "./show"
+export {ProductEdit} from "./edit"
+export {ProductShow} from "./show"

@@ -29,7 +29,7 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
-import { ProductList} from "./pages/products";
+import { ProductEdit, ProductList} from "./pages/products";
 
 
 const API_URL = "https://guided-lacewing-38.hasura.app/v1/graphql";
@@ -61,7 +61,7 @@ function App() {
               {
                 name: "products",
                 list: "/products",               
-                // edit: "/products/edit/:id",
+                edit: "/products/edit/:id",
                 // show: "/products/show/:id",
                 meta: {
                   canDelete: true,
@@ -91,9 +91,7 @@ function App() {
 
               <Route path="products">
                 <Route index element = {<ProductList/>}/>
-                {/* <Route path="/products/show/:id" element= {<UserShow/>} />
-                <Route path="/products/edit/:id" element= {<UserEdit/>} /> */}
-                {/* <Route path="/products/create" element={<ProductCreate/>}/> */}
+                <Route path="/products/edit/:id" element= {<ProductEdit/>} /> 
               </Route>
               </Route>
               <Route

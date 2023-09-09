@@ -1,7 +1,7 @@
 import React  from "react";
 import {useState} from "react";
 import { Button, Upload, UploadProps, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined, UploadOutlined } from "@ant-design/icons";
 import axios from "axios";
 // import nhost from "../../utility/nhost";
 const cloudAPI = "dk0cl9vtx";
@@ -22,8 +22,12 @@ const CustomUpload: React.FC<CustomUploadProps> = ({
   expectedFileType,
   // initial_url,
 }) =>{
+  
+  const [loading, setLoading] =useState(false)
+
   const props: UploadProps = {
     beforeUpload: async (file, fileList) => {
+      setLoading(true)
       let isValidFileType = false;
       const isLt2M = file.size / 1024 / 1024 < 2;
       if (expectedFileType === "image") {
@@ -67,7 +71,7 @@ const CustomUpload: React.FC<CustomUploadProps> = ({
           const imageUrl = res.data.secure_url;
           console.log(imageUrl,"image");
           setLink(imageUrl);
-          // setPhotoUrl(imageUrl)
+          setLoading(false)
           return false; 
 
         // const fileLink = await nhost.storage.upload({
@@ -89,11 +93,18 @@ const CustomUpload: React.FC<CustomUploadProps> = ({
   };
 
 
-
+  const uploadButton = (
+    <div>
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
 
   return (
-    <Upload {...props} maxCount={1}>
-      <Button icon={<UploadOutlined />}>Click to Upload</Button>
+    <Upload {...props} maxCount={1}  listType="picture-card"
+    className="avatar-uploader">
+      {/* <Button icon={<UploadOutlined />}>-</Button> */}
+      {link ? <img src={link} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
     </Upload>
   );
   }

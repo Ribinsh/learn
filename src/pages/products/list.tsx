@@ -276,7 +276,7 @@ export const ProductList: React.FC = () => {
       </Modal>
 
       <Modal
-        visible={imageModal}
+        open={imageModal}
         onCancel={() => {
           handleImageModal();
         }}

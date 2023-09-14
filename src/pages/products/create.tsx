@@ -121,24 +121,24 @@ export const ProductCreate: React.FC<Product> = ({ formProps }) => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Trending" name="trending">
-            <Radio.Group defaultValue={false}>
+          <Form.Item label="Trending" name="trending" initialValue={false}>
+            <Radio.Group >
               <Radio value={true}>True</Radio>
               <Radio value={false}>False</Radio>
             </Radio.Group>
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="List" name="list_status">
-            <Radio.Group defaultValue={true}>
+          <Form.Item label="List" name="list_status" initialValue={false}>
+            <Radio.Group >
               <Radio value={true}>True</Radio>
               <Radio value={false}>False</Radio>
             </Radio.Group>
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Clicks" name="total_clicks">
-            <InputNumber min={1} max={10} defaultValue={7} />
+          <Form.Item label="Clicks" name="total_clicks" initialValue={7}>
+            <InputNumber min={1} max={10}  />
           </Form.Item>
         </Col>
       </Row>

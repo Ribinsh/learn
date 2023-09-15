@@ -32,7 +32,7 @@ import { Register } from "./pages/register";
 import { ProductEdit, ProductList } from "./pages/products";
 import { AppIcon } from "./components/app-icon";
 
-const API_URL = "https://guided-lacewing-38.hasura.app/v1/graphql";
+const API_URL = "https://smart-value-finds.hasura.app/v1/graphql";
 
 const client = new GraphQLClient(API_URL, {
   headers: {

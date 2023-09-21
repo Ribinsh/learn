@@ -13,7 +13,6 @@ import {
 } from "antd";
 import CustomUpload from "../../components/CustomUpload";
 import { useState } from "react";
-// const AvatarImage = "https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&w=600";
 
 interface Product {
   formProps: any;
@@ -22,7 +21,12 @@ interface Product {
 }
 
 export const ProductCreate: React.FC<Product> = ({ formProps }) => {
-  // const [initial_url, setInitial_url] = useState<any>(AvatarImage);
+
+  const [cat,setCat] = useState<any>()
+
+  const handleInputPressEnter = (data: any) => {
+    setCat([...data]);
+  };
 
   return (
     <Form {...formProps} layout="vertical">
@@ -67,8 +71,14 @@ export const ProductCreate: React.FC<Product> = ({ formProps }) => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item label="Category" name="category">
+          <Form.Item label="Category" name="category">         
             <Select
+               value={cat}
+               mode="multiple"
+               onChange={handleInputPressEnter}
+               allowClear
+               showSearch
+               filterOption={false}
               placeholder="Choose Category"
               options={[
                 {
@@ -110,6 +120,10 @@ export const ProductCreate: React.FC<Product> = ({ formProps }) => {
                 {
                   label: "For Her",
                   value: "her",
+                },
+                {
+                  label: "Gadget",
+                  value: "gadget",
                 },
               ]}
             />

@@ -122,8 +122,8 @@ export const ProductCreate: React.FC<Product> = ({ formProps }) => {
                   value: "her",
                 },
                 {
-                  label: "Gadget",
-                  value: "gadget",
+                  label: "Gadgets",
+                  value: "gadgets",
                 },
               ]}
             />
